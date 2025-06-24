@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mariadb
+      - valkey
+    environment:
+      - DB_NAME=productos
+      - DB_USER=root
+      - DB_PASSWORD=contraseña
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - VALKEY_HOST=valkey
+      - VALKEY_PORT=6379
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    environment:
+      - MARIADB_DATABASE=productos
+      - MARIADB_USER=root
+      - MARIADB_PASSWORD=contraseña
+      - MARIADB_ROOT_PASSWORD=contraseña
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  valkey:
+    image: valkey/valkey:latest
+    container_name: valkey
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  mariadb_data:

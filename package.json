@@ -18,6 +18,7 @@
     "iovalkey": "^0.3.1",
     "jsonwebtoken": "^9.0.2",
     "mariadb": "^3.4.2",
+    "morgan": "^1.10.0",
     "sequelize": "^6.37.7"
   }
 }

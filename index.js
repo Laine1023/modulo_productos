@@ -7,13 +7,13 @@ import { configDb } from "./config/db.js";
 import dotenv from "dotenv";
 import { apiRateLimit } from "./middlewares/apiRateLimit.js";
 
-dotenv.configDotenv();
-    
+dotenv.config(); // ✅ Corrección
+
 const app = express();
 
 app.use(bodyParser.json());
-app.use(morgan());
-app.use(apiRateLimit);  
+app.use(morgan('dev')); // ✅ Especifica formato
+app.use(apiRateLimit);
 app.use("/products", productsRouter);
 
 app.get("/", [customMiddleware], (req, res) => {
@@ -25,6 +25,7 @@ app.get("/", [customMiddleware], (req, res) => {
 
 configDb();
 
-server.listen(8000, () => {
+const server = app.listen(8000, () => { // ✅ Definición de `server`
     console.log("Listening on port 8000");
 });
+

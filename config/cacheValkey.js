@@ -1,3 +1,10 @@
+import dotenv from "dotenv";
 import { Redis } from "iovalkey";
 
-export const cacheValkey = new Redis(6379, "localhost");
+dotenv.config();
+
+export const cacheValkey = new Redis({
+  port: process.env.VALKEY_PORT || 6379,
+  host: process.env.VALKEY_HOST || "localhost"
+});
+
