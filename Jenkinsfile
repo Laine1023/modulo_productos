@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-laine')
         GIT_REPO_URL = 'https://github.com/Laine1023/modulo_productos.git'
         DOCKER_IMAGE_NAME = 'lainel420/modulo_productos-backend'
     }
